@@ -2,10 +2,11 @@
 
 namespace _64FF00\PureChat\factions;
 
+use Ayzrix\SimpleFaction\API\FactionsAPI;
 use pocketmine\Player;
 use pocketmine\Server;
 
-class XeviousPE_Factions implements FactionsInterface
+class SimpleFaction implements FactionsInterface
 {
     /*
         PureChat by 64FF00 (Twitter: @64FF00)
@@ -25,24 +26,45 @@ class XeviousPE_Factions implements FactionsInterface
      */
     public function getAPI()
     {
-        return Server::getInstance()->getPluginManager()->getPlugin("XeviousPE-Factions");
-    }
-
-    /**
-     * @param Player $player
-     * @return mixed
-     */
-    public function getPlayerFaction(Player $player)
-    {
-        return $this->getAPI()->getProvider()->getPlayerFaction($player->getName());
+        return Server::getInstance()->getPluginManager()->getPlugin("SimpleFaction");
     }
 
     /**
      * @param Player $player
      * @return string
      */
-    public function getPlayerRank(Player $player)
+    public function getPlayerFaction(Player $player): string
     {
-        // TODO
+        if(FactionsAPI::isInFaction($player))
+        {
+            return FactionsAPI::getFaction($player);
+        }
+        else
+        {
+            return '...';
+        }
+    }
+
+    /**
+     * @param Player $player
+     * @return string
+     */
+    public function getPlayerRank(Player $player): string
+    {
+        if(FactionsAPI::isInFaction($player))
+        {
+            if(FactionsAPI::getRank($player->getName()) === "Leader") {
+                return '**';
+            }
+            elseif(FactionsAPI::getRank($player->getName()) === "Officer")
+            {
+                return '*';
+            }
+            else
+            {
+                return '';
+            }
+        }
+        return '';
     }
 }

@@ -5,7 +5,7 @@ namespace _64FF00\PureChat;
 use _64FF00\PureChat\factions\FactionsInterface;
 use _64FF00\PureChat\factions\FactionsProNew;
 use _64FF00\PureChat\factions\FactionsProOld;
-use _64FF00\PureChat\factions\XeviousPE_Factions;
+use _64FF00\PureChat\factions\SimpleFaction;
 
 use _64FF00\PurePerms\PPGroup;
 
@@ -371,13 +371,13 @@ class PureChat extends PluginBase
 
                     break;
 
-                case "xeviouspe-factions":
+                case "simplefaction":
 
-                    if($this->getServer()->getPluginManager()->getPlugin("XeviousPE-Factions") !== null)
+                    if($this->getServer()->getPluginManager()->getPlugin("SimpleFaction") !== null)
                     {
-                        $this->factionsAPI = new XeviousPE_Factions();
+                        $this->factionsAPI = new SimpleFaction();
 
-                        $this->getLogger()->notice("XeviousPE-Factions support enabled.");
+                        $this->getLogger()->notice("SimpleFaction support enabled.");
 
                         break;
                     }

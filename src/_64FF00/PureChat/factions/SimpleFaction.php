@@ -35,9 +35,9 @@ class SimpleFaction implements FactionsInterface
      */
     public function getPlayerFaction(Player $player): string
     {
-        if(FactionsAPI::isInFaction($player))
+        if(FactionsAPI::isInFaction($player->getName()))
         {
-            return FactionsAPI::getFaction($player);
+            return FactionsAPI::getFaction($player->getName());
         }
         else
         {
@@ -51,7 +51,7 @@ class SimpleFaction implements FactionsInterface
      */
     public function getPlayerRank(Player $player): string
     {
-        if(FactionsAPI::isInFaction($player))
+        if(FactionsAPI::isInFaction($player->getName()))
         {
             if(FactionsAPI::getRank($player->getName()) === "Leader") {
                 return '**';
